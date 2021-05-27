@@ -18,7 +18,7 @@ const New = () => {
     cover_letter_url: "",
     resume_url: "",
     notes: ""
-  });
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault()

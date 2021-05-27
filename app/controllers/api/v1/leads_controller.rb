@@ -35,6 +35,7 @@ module Api
 
 
       def destroy
+        puts "DESTROYING"
         lead = Lead.find_by(slug: params[:slug])
 
         if lead.destroy

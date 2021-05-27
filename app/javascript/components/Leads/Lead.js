@@ -1,21 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import TouchList from '../Touches/TouchList'
 import NewTouch from '../Touches/New'
+import UpdateForm from './Update'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getLead } from '../../actions/leads'
 
 const Lead = (props) => {
   const dispatch = useDispatch()
+  // @ts-ignore
   const lead = useSelector(state => state.lead)
+  let slug = props.match.params.slug
 
   useEffect(() => {
-    let slug = props.match.params.slug
     dispatch(getLead(slug))
   }, [])
 
+  const [editing, setEditing] = useState(false)
+  const toggleEditing = () => { setEditing(!editing)}
+
   if (!lead) { return <div>Loading...</div>}
-  
+  if (editing) { return <UpdateForm slug={slug} lead={lead} toggleEditing={toggleEditing} />}
+
   return(
     <div>
       <Link to="/leads">Back to leads</Link>
@@ -90,7 +96,9 @@ const Lead = (props) => {
           </div>
 
           <div>
-            <button className="btn btn-primary btn-block mt-4"> Edit Lead </button>
+            <button 
+              onClick={toggleEditing}
+              className="btn btn-primary btn-block mt-4"> Edit Lead </button>
           </div>
         </div>
 

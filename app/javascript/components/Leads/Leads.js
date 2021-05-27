@@ -14,7 +14,7 @@ const Leads = () => {
   }, [leads.length])
 
   if (leads.length === 0) {
-    return <div>Loading...</div>
+    return <NewLead />
   }
 
   const leadsList = leads.map(lead => {

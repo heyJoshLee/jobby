@@ -1,5 +1,5 @@
 class Lead < ApplicationRecord
-
+  has_many :touches, :dependent => :destroy
   before_create :slugify
   
   def slugify

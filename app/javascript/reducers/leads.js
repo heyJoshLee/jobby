@@ -7,10 +7,11 @@ export default (leads = [], action) => {
     case CREATE_LEAD:
       return [...leads, action.payload]
     case DESTROY_LEAD:
-      return leads.filter(lead => lead.id != action.payload.id)
+      console.log(leads)
+      return leads.filter(lead => lead.attributes.slug != action.payload)
     case UPDATE_LEAD:
       let updatedLeads = leads.map(lead => {
-        if (lead.id === action.payload.od) {
+        if (lead.id === action.payload.id) {
           return action.payload
         } else {
           return lead

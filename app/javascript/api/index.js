@@ -28,3 +28,11 @@ export const createLead = (lead_params) => {
 export const getLead = (leadSlug) => {
   return axios.get(`${LEADS_URL}/${leadSlug}`)
 }
+
+export const updateLead = (leadSlug, leadParams) => {
+  return axios.patch(`${LEADS_URL}/${leadSlug}`, leadParams)
+}
+
+export const destroyLead = (leadSlug) => {
+  return axios.delete(`${LEADS_URL}/${leadSlug}`)
+}

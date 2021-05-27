@@ -14,4 +14,34 @@
  *= require_self
  */
 
- @import "bootstrap/scss/bootstrap";
+@import 'bootstrap/scss/bootstrap';
+
+.underline {
+  text-decoration: underline;
+}
+
+#activity-log-accordion li {
+  list-style-type: none;
+}
+
+.activity-item-heading {
+  color: black;
+}
+
+.react-date-picker {
+  border-color: lightgrey !important;
+  padding: 10px;
+  margin-top: -5px;
+}
+
+.banded--even {
+  background-color: rgb(235, 240, 241);
+}
+
+.banded--odd {
+  background-color: lightgray;
+}
+
+.hover:hover {
+  cursor: pointer;
+}

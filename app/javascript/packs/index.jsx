@@ -7,16 +7,29 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import App from '../components/App'
 import { BrowserRouter as Router, Route} from 'react-router-dom'
-import Nav from '../components/shared/Nav'
+import Nav from '../components/Shared/Nav'
+
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
+import reducers from '../reducers'
+
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
+
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Router>
-      <Nav />
-      <div className="container">
-        <Route path='/' component={App} />
-      </div>
-    </Router>,
+    <Provider store={store}>
+      <Router>
+        <Nav />
+        <div className="container mt-3">
+          <Route path='/' component={App} />
+        </div>
+      </Router>
+    </Provider>,
     document.body.appendChild(document.createElement('div')),
   )
 })

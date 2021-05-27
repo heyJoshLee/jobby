@@ -14,7 +14,8 @@ module Api
 
       def create
         lead = Lead.new(lead_params)
-
+        # TODO change this to logged in user
+        lead.user_id = 1
         if lead.save
           render json: LeadSerializer.new(lead).serialized_json
         else

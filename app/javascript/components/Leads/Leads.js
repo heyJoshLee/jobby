@@ -1,28 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
+import NewLead from './New'
+import { Link } from 'react-router-dom'
+import { getLeads } from '../../actions/leads'
+import { useDispatch, useSelector} from 'react-redux'
 
 const Leads = () => {
-  const [leads, setLeads] = useState([])
-  useEffect(() => {
-
-    axios.get('/api/v1/leads.json')
-    .then(res => {
-      console.log(res.data.data)
-      setLeads(res.data.data)
-    })
-    .catch(res => console.log(res))
+  const dispatch = useDispatch();
+  // @ts-ignore
+  const leads = useSelector(state => state.leads)
+  useEffect( () => {
+    dispatch(getLeads())
   }, [leads.length])
 
+  if (leads.length === 0) {
+    return <div>Loading...</div>
+  }
 
   const leadsList = leads.map(lead => {
-    return <li key={lead.id}>{lead.attributes.job_title}</li>
+    return( 
+      <li key={lead.id}>
+        <Link to={`/leads/${lead.attributes.slug}`}>
+          {lead.attributes.job_title}
+        </Link>
+      </li>
+    )
   })
 
 
 
   return(
     <>
-      <h1>My Leads</h1>
+      <div className="row">
+        <div className="col-6">
+          <h1>My Leads</h1>
+        </div>
+        <div className="col-6">
+          <NewLead />
+        </div>
+      </div>
       <ul>
         {leadsList}
       </ul>

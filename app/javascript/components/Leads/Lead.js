@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import TouchList from '../Touches/TouchList'
 import NewTouch from '../Touches/New'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getLead } from '../../actions/leads'
 
-const Lead = () => {
+const Lead = (props) => {
+  const dispatch = useDispatch()
+  const lead = useSelector(state => state.lead)
+
+  useEffect(() => {
+    let slug = props.match.params.slug
+    dispatch(getLead(slug))
+  }, [])
+
+  if (!lead) { return <div>Loading...</div>}
+  
   return(
     <div>
       <Link to="/leads">Back to leads</Link>
@@ -11,69 +23,69 @@ const Lead = () => {
         <div className="row banded--even">
           <div className="col">
               <p className="underline">Title</p>
-              <p>PLACEHOLDER</p>
+              <p>{lead.attributes.job_title}</p>
           </div> 
           <div className="col">
             <p className="underline">Company Name</p>
-            <p>PLACEHOLDER</p>
+            <p>{lead.attributes.company_name}</p>
 
             </div> 
           </div>
           <div className="row banded--odd">
             <div className="col">
               <p className="underline">Company URL</p>
-              <p>PLACEHOLDER</p>
+              <a target="_blank" href={`http://${lead.attributes.company_url}`}>{lead.attributes.company_url}</a>
 
             </div> 
             <div className="col">
               <p className="underline">Job Listing URL</p>
-              <p>PLACEHOLDER</p>
+              <a target="_blank" href={`http://${lead.attributes.job_listing_url}`}>{lead.attributes.job_listing_url}</a>
 
             </div> 
             <div className="col">
               <p className="underline">About Us URL</p>
-              <p>PLACEHOLDER</p>
+              <a target="_blank" href={`http://${lead.attributes.about_us_page}`}>{lead.attributes.about_us_page}</a>
 
             </div> 
           </div>
           <div className="row banded--even">
             <div className="col">
               <p className="underline">Company Email</p>
-              <p>PLACEHOLDER</p>
+              <p>{lead.attributes.company_email}</p>
 
             </div> 
               <div className="col">
                 <p className="underline">Contact First</p>
-                <p>PLACEHOLDER</p>
+                <p>{lead.attributes.contact_first}</p>
 
               </div> 
               <div className="col">
                 <p className="underline">Contact Last</p>
-                <p>PLACEHOLDER</p>
+                <p>{lead.attributes.contact_last}</p>
 
               </div> 
               <div className="col">
                 <p className="underline">Salary Range</p>
-                <p>PLACEHOLDER</p>
+                <p>{lead.attributes.salary_range}</p>
 
             </div>
           </div>
           <div className="row banded--odd">
             <div className="col">
               <p className="underline">Cover Letter URL</p>
-              <p>PLACEHOLDER</p>
+              <a target="_blank" href={`http://${lead.attributes.cover_letter_url}`}>{lead.attributes.cover_letter_url}</a>
 
             </div> 
             <div className="col">
               <p className="underline">Resume URL</p>
-              <p>PLACEHOLDER</p>
+              <a target="_blank" href={`http://${lead.attributes.resume_url}`}>{lead.attributes.resume_url}</a>
 
             </div> 
           </div>
           <div className="row banded--even">
             <div className="col">
               <p className="underline">Notes</p>
-              <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+              <p>{lead.attributes.notes}</p>
             </div>
           </div>
 

@@ -24,3 +24,7 @@ export const getLeads = () => {
 export const createLead = (lead_params) => {
   return axios.post(LEADS_URL, lead_params)
 }
+
+export const getLead = (leadSlug) => {
+  return axios.get(`${LEADS_URL}/${leadSlug}`)
+}

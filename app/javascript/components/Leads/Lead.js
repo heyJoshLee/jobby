@@ -5,15 +5,19 @@ import UpdateForm from './Update'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getLead } from '../../actions/leads'
+import { getTouches } from '../../actions/touches'
 
 const Lead = (props) => {
   const dispatch = useDispatch()
   // @ts-ignore
   const lead = useSelector(state => state.lead)
+  // @ts-ignore
+  const touches = useSelector(state => state.touches)
   let slug = props.match.params.slug
 
   useEffect(() => {
     dispatch(getLead(slug))
+    dispatch(getTouches(slug))
   }, [])
 
   const [editing, setEditing] = useState(false)

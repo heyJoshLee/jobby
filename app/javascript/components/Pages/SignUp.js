@@ -1,16 +1,17 @@
 import React, {useState} from 'react'
-
+import { useDispatch } from 'react-redux'
+import { createUser } from '../../actions/users'
 
 const SignUp = () => {
-
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: ""
   })
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(formData)
+    dispatch(createUser({user: formData}))
   }
 
   return(
@@ -18,9 +19,9 @@ const SignUp = () => {
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group" >
-          <label htmlFor="username">Username</label>
-          <input className="form-control" type="text" name="username" id="username" value={formData.username}
-            onChange={(e) => setFormData({...formData, username: e.target.value})} 
+          <label htmlFor="email">Email</label>
+          <input className="form-control" type="email" name="email" id="email" value={formData.email}
+            onChange={(e) => setFormData({...formData, email: e.target.value})} 
           />
         </div>
         <div className="form-group" >

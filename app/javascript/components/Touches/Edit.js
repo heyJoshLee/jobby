@@ -19,7 +19,7 @@ const Edit = ({touch, toggleEdit}) => {
       <div className="card">
         <form>
           <div className="card-header" id={`activity-${touch.id}`}>
-            <button className="btn btn-link btn-block row" data-toggle="collapse" data-target={`#collapse-${touch.id}`} aria-expanded="true" aria-controls={`collapse-${touch.id}`}>
+            <div className="btn btn-link btn-block row">
                 <div className="row activity-item-heading">
                   <div className="col-3">
                     <select 
@@ -37,14 +37,14 @@ const Edit = ({touch, toggleEdit}) => {
                     value={formData.date} onChange={(e) => setFormData({...formData, date: e })} />
                   </div>
                   <div className="col">
-                    <input type="text" value={formData.title} name="title" />
+                    <input onChange={(e) =>  setFormData({...formData, title: e.target.value})} type="text" value={formData.title} name="title" />
                   </div>
               </div>
-            </button>
+            </div>
           </div>
           <div id={`collapse-${touch.id}`} className="show collapse" aria-labelledby={`activity-${touch.id}`} data-parent="#activity-log-accordion">
             <div className="card-body">
-              <textarea value={formData.body} className="form-control"></textarea>
+              <textarea onChange={(e) =>  setFormData({...formData, body: e.target.value})} value={formData.body} className="form-control"></textarea>
             </div>
             <div className="row">
               <div className="col">

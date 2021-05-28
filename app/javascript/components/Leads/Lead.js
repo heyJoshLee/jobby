@@ -109,9 +109,9 @@ const Lead = (props) => {
         <div>
           <h2>Activity Log</h2> 
           <hr />
-          <NewTouch />
+          <NewTouch slug={slug} />
           <br />
-          <TouchList />
+          <TouchList slug={slug} />
         </div>
     </div>
   )

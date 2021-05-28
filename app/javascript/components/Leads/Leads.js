@@ -8,6 +8,7 @@ const Leads = () => {
   const dispatch = useDispatch();
   // @ts-ignore
   const leads = useSelector(state => state.leads)
+  // @ts-ignore
   const auth = useSelector(state => state.auth)
 
   useEffect( () => {

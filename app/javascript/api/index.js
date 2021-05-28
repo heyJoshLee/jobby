@@ -25,21 +25,61 @@ export const createLead = (lead_params) => {
 }
 
 export const getLead = (leadSlug) => {
-  return axios.get(`${LEADS_URL}/${leadSlug}`)
+  return axios.get(`${LEADS_URL}/${leadSlug}`, { 
+    headers: {
+      'Authorization': JSON.parse(localStorage.getItem('auth'))
+    }
+  })
 }
 
 export const updateLead = (leadSlug, leadParams) => {
-  return axios.patch(`${LEADS_URL}/${leadSlug}`, leadParams)
+  return axios.patch(`${LEADS_URL}/${leadSlug}`, leadParams, { 
+    headers: {
+      'Authorization': JSON.parse(localStorage.getItem('auth'))
+    }
+  })
 }
 
 export const destroyLead = (leadSlug) => {
-  return axios.delete(`${LEADS_URL}/${leadSlug}`)
+  return axios.delete(`${LEADS_URL}/${leadSlug}`, { 
+    headers: {
+      'Authorization': JSON.parse(localStorage.getItem('auth'))
+    }
+  })
 }
 
 // touches
 
 export const getTouches = (leadSlug) => {
-  return axios.get(`${LEADS_URL}/${leadSlug}/touches`)
+  return axios.get(`${LEADS_URL}/${leadSlug}/touches`, { 
+    headers: {
+      'Authorization': JSON.parse(localStorage.getItem('auth'))
+    }
+  })
+}
+
+export const createTouch = (leadSlug, touchParams) => {
+  return axios.post(`${LEADS_URL}/${leadSlug}/touches`, touchParams, { 
+    headers: {
+      'Authorization': JSON.parse(localStorage.getItem('auth'))
+    }
+  })
+}
+
+export const updateTouch = (leadSlug, touchId, touchParams) => {
+  return axios.put(`${LEADS_URL}/${leadSlug}/touches/${touchId}`, touchParams, { 
+    headers: {
+      'Authorization': JSON.parse(localStorage.getItem('auth'))
+    }
+  })
+}
+
+export const destroyTouch = (leadSlug, touchId) => {
+  return axios.delete(`${LEADS_URL}/${leadSlug}/touches/${touchId}`,{ 
+    headers: {
+      'Authorization': JSON.parse(localStorage.getItem('auth'))
+    }
+  })
 }
 
 // users

@@ -1,9 +1,11 @@
 import React, {useState } from 'react'
 import { Pencil, Trash } from 'react-bootstrap-icons';
 import EditForm from './Edit'
+import { deleteTouch } from '../../actions/touches'
+import { useDispatch } from 'react-redux'
 
-const TouchListItem = ({touch}) => {
-
+const TouchListItem = ({touch, slug}) => {
+  const dispatch = useDispatch()
   const [state, setState] = useState({
     editing: false
   })
@@ -11,11 +13,11 @@ const TouchListItem = ({touch}) => {
 
   const renderStatusButtonClass = (status) => {
     switch(status) {
-      case 'todo':
+      case 'Todo':
         return 'btn-primary';
-      case 'canceled':
+      case 'Canceled':
         return 'btn-danger';
-      case 'done':
+      case 'Done':
         return 'btn-success'
     }
   }
@@ -27,7 +29,7 @@ const TouchListItem = ({touch}) => {
   const handleDelete = () => {
     const wantToDelete = window.confirm("Are you sure you want to delete this activity?")
     if (wantToDelete) {
-      console.log("Delete me!")
+      dispatch(deleteTouch(slug, touch.id))
     }
   }
 
@@ -40,13 +42,13 @@ const TouchListItem = ({touch}) => {
           <button className="btn btn-link btn-block row" data-toggle="collapse" data-target={`#collapse-${touch.id}`} aria-expanded="true" aria-controls={`collapse-${touch.id}`}>
               <div className="row activity-item-heading">
                 <div className="col-3">
-                  <button className={`btn ${renderStatusButtonClass(touch.status)}`}>{touch.status.charAt(0).toUpperCase() + touch.status.slice(1)}</button>
+                  <button className={`btn ${renderStatusButtonClass(touch.attributes.status)}`}>{touch.attributes.status.charAt(0).toUpperCase() + touch.attributes.status.slice(1)}</button>
                 </div>
                 <div className="col-3">
-                  <p>{touch.date}</p>
+                  <p>{touch.attributes.date}</p>
                 </div>
                 <div className="col">
-                  <p>{touch.title}</p>
+                  <p>{touch.attributes.title}</p>
                 </div>
       
             </div>
@@ -54,7 +56,7 @@ const TouchListItem = ({touch}) => {
         </div>
         <div id={`collapse-${touch.id}`} className="collapse" aria-labelledby={`activity-${touch.id}`} data-parent="#activity-log-accordion">
           <div className="card-body">
-            {touch.body}
+            {touch.attributes.body}
           </div>
           <div className="float-right">
             <Pencil onClick={toggleEdit} className="hover" />

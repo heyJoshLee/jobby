@@ -10,7 +10,7 @@ module Api
       end
 
       def index 
-        touches = @lead.touches
+        touches = @lead.touches.reverse
         render json: TouchSerializer.new(touches).serialized_json
       end
 
@@ -31,7 +31,6 @@ module Api
           render json: { error: @touch.errors.messages}
         end
       end
-
 
       def destroy
         if @touch.destroy

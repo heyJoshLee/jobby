@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import DatePicker from 'react-date-picker'
+import { useDispatch } from 'react-redux'
+import { createTouch } from '../../actions/touches'
+import jQuery from 'jquery'
 
-
-const New = () => {
-
+const New = ({ slug }) => {
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     date: new Date(),
     title: "",
@@ -11,10 +13,22 @@ const New = () => {
     status: "Todo"
   })
 
+  const clearForm = () => {
+    setFormData({
+      date: new Date(),
+      title: "",
+      body: "",
+      status: "Todo"
+    })
+  }
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(formData)
+    dispatch(createTouch(slug, {touch: formData})) 
+    clearForm()
+    jQuery('#activity-close-button').click()
+
   }
 
   return(
@@ -28,7 +42,7 @@ const New = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="new-activity-modalLabel">Modal title</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+              <button id="activity-close-button" type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>

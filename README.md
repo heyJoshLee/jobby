@@ -9,5 +9,4 @@ Built with Ruby on Rails and React
 - CRUD for activities
 - authentication
   -- wrong password logic
-
 - flash messages

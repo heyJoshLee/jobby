@@ -7,6 +7,8 @@ Built with Ruby on Rails and React
 ## TODO
 
 - CRUD for activities
+
 - authentication
   -- wrong password logic
+
 - flash messages

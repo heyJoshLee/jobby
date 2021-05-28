@@ -3,7 +3,7 @@ module Api
     class LeadsController < ApplicationController
       protect_from_forgery with: :null_session
       def index
-        leads = Lead.all
+        leads = Lead.where(user_id: current_user(token).id)
         render json: LeadSerializer.new(leads).serialized_json
       end
 
@@ -15,7 +15,8 @@ module Api
       def create
         lead = Lead.new(lead_params)
         # TODO change this to logged in user
-        lead.user_id = 1
+
+        lead.user_id = current_user(token).id
         if lead.save
           render json: LeadSerializer.new(lead).serialized_json
         else

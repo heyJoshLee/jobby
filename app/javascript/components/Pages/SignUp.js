@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { createUser } from '../../actions/users'
+import { useHistory } from "react-router-dom";
 
 const SignUp = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -12,6 +14,7 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(createUser({user: formData}))
+    history.push('/leads')
   }
 
   return(

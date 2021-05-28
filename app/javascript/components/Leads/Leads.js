@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'
 import NewLead from './New'
 import { Link } from 'react-router-dom'
 import { getLeads } from '../../actions/leads'
@@ -9,9 +8,13 @@ const Leads = () => {
   const dispatch = useDispatch();
   // @ts-ignore
   const leads = useSelector(state => state.leads)
+  const auth = useSelector(state => state.auth)
+
   useEffect( () => {
-    dispatch(getLeads())
-  }, [leads.length])
+    if (auth) { dispatch(getLeads()) }
+  }, [leads.length, auth])
+
+  if (!auth) { return <div>Loading...</div>}
 
   if (leads.length === 0) {
     return <NewLead />

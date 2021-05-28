@@ -1,4 +1,4 @@
-import { GET_LEADS, GET_LEAD, CREATE_LEAD, UPDATE_LEAD, DESTROY_LEAD } from '../types/index'
+import { GET_LEADS, SIGN_OUT, CREATE_LEAD, UPDATE_LEAD, DESTROY_LEAD } from '../types/index'
 
 export default (leads = [], action) => {
   switch (action.type) {
@@ -7,7 +7,6 @@ export default (leads = [], action) => {
     case CREATE_LEAD:
       return [...leads, action.payload]
     case DESTROY_LEAD:
-      console.log(leads)
       return leads.filter(lead => lead.attributes.slug != action.payload)
     case UPDATE_LEAD:
       let updatedLeads = leads.map(lead => {
@@ -18,6 +17,8 @@ export default (leads = [], action) => {
         }
       })
       return updatedLeads
+    case SIGN_OUT:
+      return []
     default:
       return leads
   }

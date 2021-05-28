@@ -1,15 +1,6 @@
 import axios from 'axios'
 
-let token = JSON.parse(localStorage.getItem('auth'))?.token;
-let configFromLocalStorage = null
-
-if (token) {
-  configFromLocalStorage = {
-    headers: {
-      'Authorization': token
-    }
-  }
-}
+let token = JSON.parse(localStorage.getItem('auth'))
 
 const BASE_URL = '/api/v1'
 const LEADS_URL = `${BASE_URL}/leads`
@@ -18,11 +9,19 @@ const SIGN_IN_URL = `${BASE_URL}/signin`
 // leads
 
 export const getLeads = () => {
-  return axios.get(LEADS_URL)
+  return axios.get(LEADS_URL, { 
+    headers: {
+      'Authorization': JSON.parse(localStorage.getItem('auth'))
+    }
+  })
 }
 
 export const createLead = (lead_params) => {
-  return axios.post(LEADS_URL, lead_params)
+  return axios.post(LEADS_URL, lead_params, { 
+    headers: {
+      'Authorization': JSON.parse(localStorage.getItem('auth'))
+    }
+  })
 }
 
 export const getLead = (leadSlug) => {

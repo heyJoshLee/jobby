@@ -12,3 +12,4 @@ export const DESTROY_TOUCH = "DESTROY_TOUCH"
 export const CREATE_USER = "CREATE_USER"
 
 export const SIGN_IN = "SIGN_IN"
+export const SIGN_OUT = "SIGN_OUT"

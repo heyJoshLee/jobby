@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { signIn } from '../../actions/auth'
+import { useHistory } from "react-router-dom";
 
 const SignIn = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
+
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -12,6 +15,7 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(signIn(formData))
+    history.push('/')
   }
 
   return(

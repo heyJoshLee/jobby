@@ -1,6 +1,6 @@
 import * as api from '../api'
 
-import { GET_TOUCHES, CREATE_TOUCH, DESTROY_TOUCH } from '../types/index'
+import { GET_TOUCHES, CREATE_TOUCH, DESTROY_TOUCH, UPDATE_TOUCH } from '../types/index'
 
 export const getTouches = (leadSlug) => async (dispatch) => {
   const { data } = await api.getTouches(leadSlug)
@@ -23,5 +23,13 @@ export const deleteTouch = (leadSlug, touchId) => async (dispatch) => {
   dispatch({
     type: DESTROY_TOUCH,
     payload: touchId
+  })
+}
+
+export const updateTouch = (leadSlug, touchId, touchParams) => async (dispatch) => {
+  const { data } = await api.updateTouch(leadSlug, touchId, touchParams)
+  dispatch({
+    type: UPDATE_TOUCH,
+    payload: data.data
   })
 }

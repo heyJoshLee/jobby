@@ -74,19 +74,19 @@ const New = ({ slug }) => {
                   <div className="form-group">
                     <div className="row">
                       <div className="col">
-                        <label htmlFor="activity-status">Status</label>
-                        <select 
+                        {/* <label htmlFor="activity-status">Status</label> */}
+                        {/* <select 
                           value={formData.status}
                           onChange={(e) => setFormData({...formData, status: e.target.value})}
                           className="form-control" id="activity-status">
                           <option value="Todo">Todo</option>
                           <option value="Completed">Completed</option>
                           <option value="Canceled">Canceled</option>
-                        </select>
+                        </select> */}
                       </div>
                       <div className="col">
-                         <p>Date</p>
-                        <DatePicker value={formData.date} onChange={(e) => setFormData({...formData, date: e })} />
+                         {/* <p>Date</p> */}
+                        {/* <DatePicker value={formData.date} onChange={(e) => setFormData({...formData, date: e })} /> */}
                       </div>
                     </div>
                   </div>

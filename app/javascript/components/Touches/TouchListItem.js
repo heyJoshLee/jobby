@@ -17,7 +17,7 @@ const TouchListItem = ({touch, slug}) => {
         return 'btn-primary';
       case 'Canceled':
         return 'btn-danger';
-      case 'Done':
+      case 'Completed':
         return 'btn-success'
     }
   }
@@ -33,7 +33,7 @@ const TouchListItem = ({touch, slug}) => {
     }
   }
 
-  if (state.editing) { return <EditForm toggleEdit={toggleEdit} touch={touch} />}
+  if (state.editing) { return <EditForm slug={slug} toggleEdit={toggleEdit} touch={touch} />}
 
   return(
     <li>
@@ -42,7 +42,7 @@ const TouchListItem = ({touch, slug}) => {
           <button className="btn btn-link btn-block row" data-toggle="collapse" data-target={`#collapse-${touch.id}`} aria-expanded="true" aria-controls={`collapse-${touch.id}`}>
               <div className="row activity-item-heading">
                 <div className="col-3">
-                  <button className={`btn ${renderStatusButtonClass(touch.attributes.status)}`}>{touch.attributes.status.charAt(0).toUpperCase() + touch.attributes.status.slice(1)}</button>
+                  {/* <button className={`btn ${renderStatusButtonClass(touch.attributes.status)}`}>{touch.attributes.status.charAt(0).toUpperCase() + touch.attributes.status.slice(1)}</button> */}
                 </div>
                 <div className="col-3">
                   <p>{touch.attributes.date}</p>
@@ -59,7 +59,7 @@ const TouchListItem = ({touch, slug}) => {
             {touch.attributes.body}
           </div>
           <div className="float-right">
-            <Pencil onClick={toggleEdit} className="hover" />
+            {/* <Pencil onClick={toggleEdit} className="hover" /> */}
             <Trash onClick={handleDelete} className="ml-2 mr-2 hover" />
           </div>
         </div>

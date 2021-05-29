@@ -6,9 +6,14 @@ Built with Ruby on Rails and React
 
 ## TODO
 
-- CRUD for activities
+- Activities - update
 
 - authentication
   -- wrong password logic
+  -- redirect for not logged in
 
 - flash messages
+
+- Tesing
+  RSPEC
+  JEST

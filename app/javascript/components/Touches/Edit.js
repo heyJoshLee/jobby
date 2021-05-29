@@ -1,14 +1,22 @@
 import React, { useState } from 'react'
 import DatePicker from 'react-date-picker'
+import { useDispatch } from 'react-redux'
+import{ updateTouch } from '../../actions/touches'
 
-const Edit = ({touch, toggleEdit}) => {
-
+const Edit = ({slug, touch, toggleEdit}) => {
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
-    date: "",
-    title: "",
-    body: "",
-    status: ""
+    date: touch.data,
+    title: touch.title,
+    body: touch.body,
+    status: touch.status
   })
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(updateTouch(slug, touch.id, formData))
+    cancelEditing()
+  }
 
   const cancelEditing = () => {
     toggleEdit()
@@ -17,24 +25,23 @@ const Edit = ({touch, toggleEdit}) => {
   return(
     <li>
       <div className="card">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="card-header" id={`activity-${touch.id}`}>
             <div className="btn btn-link btn-block row">
                 <div className="row activity-item-heading">
                   <div className="col-3">
-                    <select 
+                    {/* <select 
                       value={formData.status}
                       onChange={(e) => setFormData({...formData, status: e.target.value})}
                       className="form-control" id="activity-status">
                       <option value="Todo">Todo</option>
                       <option value="Completed">Completed</option>
                       <option value="Canceled">Canceled</option>
-                    </select>
+                    </select> */}
                   </div>
                   <div className="col-3">
-                    <DatePicker 
-// @ts-ignore
-                    value={formData.date} onChange={(e) => setFormData({...formData, date: e })} />
+                    {/* <DatePicker 
+                    value={formData.date} onChange={(e) => setFormData({...formData, date: e })} /> */}
                   </div>
                   <div className="col">
                     <input onChange={(e) =>  setFormData({...formData, title: e.target.value})} type="text" value={formData.title} name="title" />

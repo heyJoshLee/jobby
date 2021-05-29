@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import App from '../components/App'
 import { BrowserRouter as Router, Route} from 'react-router-dom'
-// import Nav from '../components/Shared/Nav'
+import Nav from '../components/Shared/Nav'
 
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <Provider store={store}>
       <Router>
+        <Nav />
         <div className="container mt-3">
           <Route path='/' component={App} />
         </div>

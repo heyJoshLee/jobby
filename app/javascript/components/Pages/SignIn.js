@@ -1,17 +1,21 @@
 import React, {useState} from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { signIn } from '../../actions/auth'
 import { useHistory } from "react-router-dom";
+import  { Redirect } from 'react-router-dom'
 
 const SignIn = () => {
   const dispatch = useDispatch()
   const history = useHistory()
+  // @ts-ignore
+  const auth = useSelector(state => state.auth)
 
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   })
 
+  if (auth) {<Redirect to="/" />}
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(signIn(formData))

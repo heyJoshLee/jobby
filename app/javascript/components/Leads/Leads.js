@@ -3,6 +3,8 @@ import NewLead from './New'
 import { Link } from 'react-router-dom'
 import { getLeads } from '../../actions/leads'
 import { useDispatch, useSelector} from 'react-redux'
+import  { Redirect } from 'react-router-dom'
+
 
 const Leads = () => {
   const dispatch = useDispatch();
@@ -15,7 +17,10 @@ const Leads = () => {
     if (auth) { dispatch(getLeads()) }
   }, [leads.length, auth])
 
-  if (!auth) { return <div>Loading...</div>}
+  if (!auth) { return <div>
+    <Redirect to="/signin"/>
+  </div>
+  }
 
   if (leads.length === 0) {
     return <NewLead />

@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import TouchList from '../Touches/TouchList'
 import NewTouch from '../Touches/New'
 import UpdateForm from './Update'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getLead } from '../../actions/leads'
 import { getTouches } from '../../actions/touches'
 
 const Lead = (props) => {
   const dispatch = useDispatch()
+  // @ts-ignore
+  const auth = useSelector(state => state.auth)
   // @ts-ignore
   const lead = useSelector(state => state.lead)
   // @ts-ignore
@@ -23,6 +25,7 @@ const Lead = (props) => {
   const [editing, setEditing] = useState(false)
   const toggleEditing = () => { setEditing(!editing)}
 
+  if (!auth) { <Redirect to="/signin" />}
   if (!lead) { return <div>Loading...</div>}
   if (editing) { return <UpdateForm slug={slug} lead={lead} toggleEditing={toggleEditing} />}
 
